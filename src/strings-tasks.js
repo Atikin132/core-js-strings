@@ -477,8 +477,21 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  return str.replace(/[a-zA-Z]/g, (char) => {
+    const charCode = char.charCodeAt(0);
+    if (charCode >= 65 && charCode <= 90) {
+      return charCode > 77 && charCode <= 90
+        ? String.fromCharCode(charCode - 13)
+        : String.fromCharCode(charCode + 13);
+    }
+    if (charCode >= 97 && charCode <= 122) {
+      return charCode > 109 && charCode <= 122
+        ? String.fromCharCode(charCode - 13)
+        : String.fromCharCode(charCode + 13);
+    }
+    return '';
+  });
 }
 
 /**
